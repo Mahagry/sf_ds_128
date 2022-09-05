@@ -1,7 +1,7 @@
 import numpy as np
 
-def random_predict(number:int=1) -> int:
-    """Рандомно угадываем число
+def cycle_predict(number:int=1) -> int:
+    """Угадываем число с помощью цикла while
 
     Args:
         number (int, optional): Загаданное число. Defaults to 1.
@@ -11,7 +11,7 @@ def random_predict(number:int=1) -> int:
     """
 
     count = 0
-    min_number = 1 # Минимальное значение рассматриваемого интервала
+    min_number = 0 # Минимальное значение рассматриваемого интервала
     max_number = 100 # Максимальное значение рассматриваемого интервала
 
     while min_number <= max_number:
@@ -25,11 +25,11 @@ def random_predict(number:int=1) -> int:
             return count
     return -1
 
-def score_game(random_predict) -> int:
+def score_game(cycle_predict) -> int:
     """За какое количество попыток в среднем из 1000 подходов угадывает наш алгоритм
 
     Args:
-        random_predict ([type]): функция угадывания
+        cycle_predict ([type]): функция угадывания
 
     Returns:
         int: среднее количество попыток
@@ -40,7 +40,7 @@ def score_game(random_predict) -> int:
     random_array = np.random.randint(1, 101, size=(1000)) # загадали список чисел
 
     for number in random_array:
-        count_ls.append(random_predict(number))
+        count_ls.append(cycle_predict(number))
 
     score = int(np.mean(count_ls)) # находим среднее количество попыток
 
@@ -49,4 +49,4 @@ def score_game(random_predict) -> int:
 
 # RUN
 if __name__ == '__main__':
-    score_game(random_predict)
+    score_game(cycle_predict)
